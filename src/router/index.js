@@ -7,28 +7,49 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    redirect: '/article'
+    redirect: '/article',
+    component: () => import('@/layout/default'),
+    children: [
+      {
+        path: 'article',
+        name: 'article',
+        component: () =>
+          import(/* webpackChunkName: "article" */ '@/views/article/index')
+      },
+      {
+        path: 'tag',
+        name: 'tag',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>
+          import(/* webpackChunkName: "tag" */ '../views/tag/index.vue')
+      },
+      {
+        path: 'category',
+        name: 'category',
+        component: () =>
+          import(/* webpackChunkName: "category" */ '../views/category/index.vue')
+      },
+      {
+        path: 'comment',
+        name: 'comment',
+        component: () =>
+          import(/* webpackChunkName: "comment" */ '../views/comment/index.vue')
+      }
+    ]
   },
   {
-    path: '/article',
-    name: 'article',
+    path: '/login',
+    name: 'login',
     component: () =>
-      import(/* webpackChunkName: "article" */ '@/views/article/index')
+      import(/* webpackChunkName: "login" */ '../views/login/index.vue')
   },
   {
-    path: '/tag',
-    name: 'tag',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: '/register',
+    name: 'register',
     component: () =>
-      import(/* webpackChunkName: "tag" */ '../views/tag/index.vue')
-  },
-  {
-    path: '/category',
-    name: 'category',
-    component: () =>
-      import(/* webpackChunkName: "category" */ '../views/category/index.vue')
+      import(/* webpackChunkName: "register" */ '../views/register/index.vue')
   }
 ]
 
